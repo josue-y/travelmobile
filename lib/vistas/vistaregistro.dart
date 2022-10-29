@@ -79,7 +79,7 @@ class _VistaRegistroState extends State<VistaRegistro> {
         if (fantasia) favoritos = "$favoritos Fantasia";
         if (terror) favoritos = "$favoritos Terror";
         var usuario = User(
-            namelogin.text, emaillogin, password, genero, favoritos, fecha);
+            namelogin.text, emaillogin.text, password.text, genero, favoritos, fecha);
         guardarUser(usuario);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => VistaLogin()));
