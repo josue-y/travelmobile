@@ -1,5 +1,6 @@
 import 'package:ejemplo_2/vistas/vistaregistro.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class VistaLogin extends StatefulWidget {
   const VistaLogin({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class _VistaLoginState extends State<VistaLogin> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => VistaRegistro()));
                 },
-                child: const Text("Resgistrese"),
+                child: const Text("Resgistrarse"),
               ),
             ],
           ),
