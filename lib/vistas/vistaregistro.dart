@@ -1,4 +1,5 @@
-import 'package:ejemplo_2/vistas/user.dart';
+import 'package:ejemplo_2/modelos/user.dart';
+import 'package:ejemplo_2/repositorio/firebase.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,8 @@ class VistaRegistro extends StatefulWidget {
 enum Genero { masculino, femenino }
 
 class _VistaRegistroState extends State<VistaRegistro> {
+
+  final Firebase firebase = Firebase();
   final namelogin = TextEditingController();
   final emaillogin = TextEditingController();
   final password = TextEditingController();

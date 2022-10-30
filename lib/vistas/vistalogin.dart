@@ -1,5 +1,6 @@
 import 'package:ejemplo_2/vistas/vistaregistro.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class VistaLogin extends StatefulWidget {
@@ -10,6 +11,9 @@ class VistaLogin extends StatefulWidget {
 }
 
 class _VistaLoginState extends State<VistaLogin> {
+  FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
+
+
   final email = TextEditingController();
   final contrasena = TextEditingController();
 
@@ -51,6 +55,8 @@ class _VistaLoginState extends State<VistaLogin> {
               const SizedBox(
                 height: 16.0,
               ),
+
+
               ElevatedButton(
                   onPressed: () {}, child: const Text("iniciar Sesión")),
               TextButton(
