@@ -9,8 +9,7 @@ class VistaSplash extends StatefulWidget {
 }
 
 class _VistaSplashState extends State<VistaSplash> {
-
-  void initState (){
+  void initState() {
     cierreSplash();
     super.initState();
   }

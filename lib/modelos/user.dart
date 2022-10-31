@@ -1,44 +1,25 @@
-class  User {
-  var _nombre;
-  var _correo;
+class Usuario {
+  var _email;
   var _password;
-  var _genero;
-  var _generofav;
-  var _fechaNacimiento;
 
-  User(this._nombre, this._correo, this._password, this._genero,
-      this._generofav, this._fechaNacimiento);
+  Usuario.Empty();
 
-  User.fromJson(Map<String, dynamic> json)
-      : _nombre = json ['namelogin'],
-        _correo = json ['emaillogin'],
-        _password = json ['password'],
-        _genero = json ['genero'],
-        _generofav = json ['favoritos'],
-        _fechaNacimiento = json ['fecha'];
+  Usuario.fromJson(Map<String, dynamic> json)
+      :
+        _email = json['email'],
+        _password = json['password'];
 
-  Map<String, dynamic> Tojson() => {
-        'namelogin': _nombre,
-        'emaillogin': _correo,
-        'password': _password,
-        'genero': _genero,
-        'favoritos': _generofav,
-        'fecha': _fechaNacimiento
-      };
+  Map<String, dynamic> toJson() => {
+    'email': _email,
+    'password': _password,
+  };
 
+  Usuario(this._email, this._password);
 
-  get nombre => _nombre;
+  get email => _email;
 
-  get generofav => _generofav;
-
-  set generofav(value) {
-    _generofav = value;
-  }
-
-  get genero => _genero;
-
-  set genero(value) {
-    _genero = value;
+  set email(value) {
+    _email = value;
   }
 
   get password => _password;
@@ -47,13 +28,5 @@ class  User {
     _password = value;
   }
 
-  get correo => _correo;
 
-  set correo(value) {
-    _correo = value;
-  }
-
-  set nombre(value) {
-    _nombre = value;
-  }
 }

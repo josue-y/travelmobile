@@ -1,7 +1,10 @@
+import 'package:ejemplo_2/modelos/user.dart';
+import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistro.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class VistaLogin extends StatefulWidget {
   const VistaLogin({Key? key}) : super(key: key);
@@ -11,71 +14,86 @@ class VistaLogin extends StatefulWidget {
 }
 
 class _VistaLoginState extends State<VistaLogin> {
-  FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
+  final _email = TextEditingController();
+  final _password = TextEditingController();
 
+  Usuario userloader = Usuario.Empty();
 
-  final email = TextEditingController();
-  final contrasena = TextEditingController();
+  obtenerUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> userMap = jsonDecode(prefs.getString("user")!);
+    userloader = Usuario.fromJson(userMap);
+  }
+  void validarUser (){
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> VistaPoi()));
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 100,
-                height: 100,
-                margin: EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: AssetImage(
-                    "imagenes/dado.jpeg",
-                  )),
-                ),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 100,
+                    height: 100,
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: AssetImage(
+                            "imagenes/viaje.jpg",
+                          )),
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _email,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Correo electrónico'),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  TextFormField(
+                    controller: _password,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), labelText: 'Contraseña'),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        validarUser();
+                      },
+                      child: const Text('Iniciar sesión')),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.blue)),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VistaRegistro()));
+                    },
+                    child: const Text('Registrese'),
+                  ),
+                ],
               ),
-              TextFormField(
-                controller: email,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Correo Electronico"),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              TextFormField(
-                controller: contrasena,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Contraseña"),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-
-
-              ElevatedButton(
-                  onPressed: () {}, child: const Text("iniciar Sesión")),
-              TextButton(
-                style: TextButton.styleFrom(
-                    textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontFamily: "contenido",
-                        fontStyle: FontStyle.normal,
-                        color: Colors.cyan)),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => VistaRegistro()));
-                },
-                child: const Text("Resgistrarse"),
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          )),
     );
   }
 }

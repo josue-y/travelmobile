@@ -26,7 +26,7 @@ class Inicio extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       supportedLocales: const [Locale("en", "US"), Locale("es", "CO")],
-      theme: ThemeData(primarySwatch: Colors.blueGrey),
+      theme: ThemeData(primarySwatch: Colors.teal),
       home: const VistaSplash(),
     );
   }
