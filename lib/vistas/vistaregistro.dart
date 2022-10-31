@@ -1,5 +1,4 @@
 import 'package:ejemplo_2/modelos/user.dart';
-import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:flutter/material.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:intl/intl.dart';
@@ -16,14 +15,12 @@ class VistaRegistro extends StatefulWidget {
 enum Genero { masculino, femenino }
 
 class _VistaRegistroState extends State<VistaRegistro> {
-  //final Firebase firebase = Firebase();
-
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _repetirPassword = TextEditingController();
 
-  String _data = "Informacion: ";
+  String _data = "Información: ";
 
   Genero? _genre = Genero.masculino;
 
@@ -71,7 +68,7 @@ class _VistaRegistroState extends State<VistaRegistro> {
 
   void guardarUser(Usuario usuario) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("user", jsonEncode("user"));
+    prefs.setString("usuario", jsonEncode(usuario));
     //var result = await firebase.registerUser(user.email, user.password);
   }
 
@@ -88,10 +85,10 @@ class _VistaRegistroState extends State<VistaRegistro> {
         if (_aventura) favoritos = "$favoritos Aventura";
         if (_fantasia) favoritos = "$favoritos Fantasia";
         if (_terror) favoritos = "$favoritos Terror";
-        var user = Usuario(_email.text, _password.text);
-        guardarUser(user);
+        var usuario = Usuario(_email.text, _password.text);
+        guardarUser(usuario);
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => VistaPoi()));
+            context, MaterialPageRoute(builder: (context) => VistaLogin()));
       } else {
         mostrarMsg("Las contraseñas no coinciden");
       }
