@@ -177,11 +177,11 @@ class _VistaRegistroState extends State<VistaRegistro> {
                     ],
                   ),
                   const Text(
-                    'Generos favoritos',
+                    'Sitios de interés "Medellin"',
                     style: TextStyle(fontSize: 20),
                   ),
                   CheckboxListTile(
-                    title: const Text('Aventura'),
+                    title: const Text('Individual'),
                     value: _aventura,
                     selected: _aventura,
                     onChanged: (bool? value) {
@@ -191,7 +191,7 @@ class _VistaRegistroState extends State<VistaRegistro> {
                     },
                   ),
                   CheckboxListTile(
-                    title: const Text('Fantasia'),
+                    title: const Text('Con amigos'),
                     value: _fantasia,
                     selected: _fantasia,
                     onChanged: (bool? value) {
@@ -201,7 +201,7 @@ class _VistaRegistroState extends State<VistaRegistro> {
                     },
                   ),
                   CheckboxListTile(
-                    title: const Text('Terror'),
+                    title: const Text('En familia'),
                     value: _terror,
                     selected: _terror,
                     onChanged: (bool? value) {
