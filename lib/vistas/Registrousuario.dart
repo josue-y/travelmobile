@@ -11,15 +11,20 @@ import 'package:ejemplo_2/firebase_options.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
-class VistaLogin extends StatefulWidget {
-  const VistaLogin({Key? key}) : super(key: key);
+class RegistrarUsuario extends StatefulWidget {
+  const RegistrarUsuario({Key? key}) : super(key: key);
+
+
 
   @override
-  State<VistaLogin> createState() => _VistaLoginState();
+  State<RegistrarUsuario> createState() => _RegistrarUsuarioState();
 }
 
-class _VistaLoginState extends State<VistaLogin> {
-  FirebaseAuth firebaseAuth=FirebaseAuth.instance;
+class RegistrarUsuarioFireBase {
+}
+
+class _RegistrarUsuarioState extends State<RegistrarUsuario> {
+  RegistrarUsuarioFireBase registrarUsuarioFireBase=RegistrarUsuarioFireBase();
   final usuario = TextEditingController();
   final _passwordclave = TextEditingController();
   String usu="";
@@ -32,7 +37,7 @@ class _VistaLoginState extends State<VistaLogin> {
   }
   void validarUser (){
 
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> VistaPoi()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> VistaPoi()));
 
   }
 
@@ -47,8 +52,8 @@ class _VistaLoginState extends State<VistaLogin> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    width: 80,
-                    height: 80,
+                    width: 70,
+                    height: 70,
                     margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -75,7 +80,7 @@ class _VistaLoginState extends State<VistaLogin> {
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 8.0,
                   ),
                   ElevatedButton(
                       onPressed: () {
@@ -91,22 +96,12 @@ class _VistaLoginState extends State<VistaLogin> {
                     onPressed: () async {
                       usu = usuario.text;
                       clave = clave;
-                      final datos = await firebaseAuth
-                          .signInWithEmailAndPassword(
-                          email: usu, password: clave);
-                      print(datos);
-                      if (datos != null) {
-                        print(usu);
-                        print(clave);
-                      }
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => VistaRegistro()));
+                      Fluttertoast.showToast(msg: "Datos Registrados",toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER);
+
                     },
 
-
                     child: const Text('Registrese'),
+
 
                   ),
                 ],
@@ -118,3 +113,4 @@ class _VistaLoginState extends State<VistaLogin> {
 
   }
 }
+

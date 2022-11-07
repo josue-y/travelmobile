@@ -221,7 +221,7 @@ class _VistaRegistroState extends State<VistaRegistro> {
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                     onPressed: () {
-                      botonRegistro();
+                     Navigator.push(context,MaterialPageRoute(builder: (context)=>VistaRegistro()));
                     },
                     child: const Text("Registrar"),
                   ),
