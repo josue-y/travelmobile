@@ -1,13 +1,13 @@
-class User {
+class Users {
   var _email;
   var _password;
   var _genre;
   var _favoritesGenres;
   var _bornDate;
 
-  User.Empty();
+  Users.Empty();
 
-  User.fromJson(Map<String, dynamic> json)
+  Users.fromJson(Map<String, dynamic> json)
       :
 
         _email = json['email'],
@@ -25,8 +25,11 @@ class User {
     'bornDate': _bornDate
   };
 
-  User( this._email, this._password, this._genre,
-      this._favoritesGenres, this._bornDate);
+
+  Users( this._email, this._password);
+
+  // User( this._email, this._password, this._genre,
+  //     this._favoritesGenres, this._bornDate);
 
 
 

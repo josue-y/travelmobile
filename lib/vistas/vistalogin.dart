@@ -16,12 +16,12 @@ class _VistaLoginState extends State<VistaLogin> {
   final _email = TextEditingController();
   final _password = TextEditingController();
 
-  User userloader = User.Empty();
+  Users userloader = Users.Empty();
 
   obtenerUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> userMap = jsonDecode(prefs.getString("user")!);
-    userloader = User.fromJson(userMap);
+    userloader = Users.fromJson(userMap);
   }
 
   void validarUser() {

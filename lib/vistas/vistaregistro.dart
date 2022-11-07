@@ -1,5 +1,6 @@
 import 'package:ejemplo_2/modelos/user.dart';
 import 'package:ejemplo_2/repositorio/firebase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:intl/intl.dart';
@@ -16,8 +17,9 @@ class VistaRegistro extends StatefulWidget {
 enum Genero { masculino, femenino }
 
 class _VistaRegistroState extends State<VistaRegistro> {
-
-  final Firebase firebseApi = Firebase();  //Semana 4
+  //final Firebase firebseApi = Firebase();  //Semana 4
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Firebase objectFirebaseUser = Firebase();
 
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -69,10 +71,20 @@ class _VistaRegistroState extends State<VistaRegistro> {
     );
   }
 
-  void guardarUsuario(User user) async {
+  void guardarUsuario(Users users) async {
     //SharedPreferences prefs = await SharedPreferences.getInstance();
     //prefs.setString("user", jsonEncode(user)); //Semana 4
-    var result = await firebseApi.registrarUsuario(user.email, user.password);
+    var result =
+        await objectFirebaseUser.registrarUsuario(_email.text, _password.text);
+    if (result) {
+      mostrarMsg("Datos registrados");
+    }
+
+    // final datos =
+    //     await objectFirebaseUser.registrarUsuario(users.email, users.password);
+    // if (datos){
+    //   mostrarMsg("Datos registrados");
+    // }
   }
 
   void botonRegistro() {
@@ -88,8 +100,8 @@ class _VistaRegistroState extends State<VistaRegistro> {
         if (_individual) favoritos = "$favoritos Individual";
         if (_amigos) favoritos = "$favoritos Amigos";
         if (_familia) favoritos = "$favoritos Familia";
-        var user = User( _email.text, _password.text, genero, favoritos, _date);
-        guardarUsuario(user);
+        var usuario = Users(_email.text, _password.text);
+        guardarUsuario(usuario);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => VistaLogin()));
       } else {
@@ -224,7 +236,11 @@ class _VistaRegistroState extends State<VistaRegistro> {
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                     onPressed: () {
-                     Navigator.push(context,MaterialPageRoute(builder: (context)=>VistaRegistro()));
+                      botonRegistro();
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => VistaRegistro()));
                     },
                     child: const Text("Registrar"),
                   ),
