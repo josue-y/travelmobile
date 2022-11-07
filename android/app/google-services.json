@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "691824795003",
-    "project_id": "dbgroupmovile",
-    "storage_bucket": "dbgroupmovile.appspot.com"
+    "project_number": "648334559138",
+    "project_id": "travelmobile-4e339",
+    "storage_bucket": "travelmobile-4e339.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:691824795003:android:eaf20f914fbd04814b31de",
+        "mobilesdk_app_id": "1:648334559138:android:d1f3fe9f446787025d94fb",
         "android_client_info": {
           "package_name": "com.example.travelmobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "691824795003-4a4hvra6ch83lvl5l23ugdn8ajq0dv1o.apps.googleusercontent.com",
+          "client_id": "648334559138-fkiandlqlq12cnt9emfmnghrsbgijq0r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBysfxnn7BcOczZI6gTeU9gGd2gIMZSpFI"
+          "current_key": "AIzaSyB5h5YrryDYh__YZF0VLy5caHYcZCOW-dc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "691824795003-4a4hvra6ch83lvl5l23ugdn8ajq0dv1o.apps.googleusercontent.com",
+              "client_id": "648334559138-fkiandlqlq12cnt9emfmnghrsbgijq0r.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "648334559138-a39krvr9qbm0ttjdhndjqbogo9d59kcs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.travelmobile"
+              }
             }
           ]
         }

@@ -1,4 +1,5 @@
 import 'package:ejemplo_2/modelos/user.dart';
+import 'package:ejemplo_2/repositorio/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +16,9 @@ class VistaRegistro extends StatefulWidget {
 enum Genero { masculino, femenino }
 
 class _VistaRegistroState extends State<VistaRegistro> {
-  final _name = TextEditingController();
+
+  final Firebase firebseApi = Firebase();  //Semana 4
+
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _repetirPassword = TextEditingController();
@@ -24,9 +27,9 @@ class _VistaRegistroState extends State<VistaRegistro> {
 
   Genero? _genre = Genero.masculino;
 
-  bool _aventura = false;
-  bool _fantasia = false;
-  bool _terror = false;
+  bool _individual = false;
+  bool _amigos = false;
+  bool _familia = false;
 
   String botonMsg = "Fecha de nacimiento";
 
@@ -66,27 +69,27 @@ class _VistaRegistroState extends State<VistaRegistro> {
     );
   }
 
-  void guardarUser(Usuario usuario) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("usuario", jsonEncode(usuario));
-    //var result = await firebase.registerUser(user.email, user.password);
+  void guardarUsuario(User user) async {
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.setString("user", jsonEncode(user)); //Semana 4
+    var result = await firebseApi.registrarUsuario(user.email, user.password);
   }
 
   void botonRegistro() {
     setState(() {
       if (_password.text == _repetirPassword.text) {
-        String genre = "Masculino";
+        String genero = "Masculino";
         String favoritos = "";
 
         if (_genre == Genero.femenino) {
-          genre = "Femenino";
+          genero = "Femenino";
         }
 
-        if (_aventura) favoritos = "$favoritos Aventura";
-        if (_fantasia) favoritos = "$favoritos Fantasia";
-        if (_terror) favoritos = "$favoritos Terror";
-        var usuario = Usuario(_email.text, _password.text);
-        guardarUser(usuario);
+        if (_individual) favoritos = "$favoritos Individual";
+        if (_amigos) favoritos = "$favoritos Amigos";
+        if (_familia) favoritos = "$favoritos Familia";
+        var user = User( _email.text, _password.text, genero, favoritos, _date);
+        guardarUsuario(user);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => VistaLogin()));
       } else {
@@ -179,31 +182,31 @@ class _VistaRegistroState extends State<VistaRegistro> {
                   ),
                   CheckboxListTile(
                     title: const Text('Individual'),
-                    value: _aventura,
-                    selected: _aventura,
+                    value: _individual,
+                    selected: _individual,
                     onChanged: (bool? value) {
                       setState(() {
-                        _aventura = value!;
+                        _individual = value!;
                       });
                     },
                   ),
                   CheckboxListTile(
                     title: const Text('Con amigos'),
-                    value: _fantasia,
-                    selected: _fantasia,
+                    value: _amigos,
+                    selected: _amigos,
                     onChanged: (bool? value) {
                       setState(() {
-                        _fantasia = value!;
+                        _amigos = value!;
                       });
                     },
                   ),
                   CheckboxListTile(
                     title: const Text('En familia'),
-                    value: _terror,
-                    selected: _terror,
+                    value: _familia,
+                    selected: _familia,
                     onChanged: (bool? value) {
                       setState(() {
-                        _terror = value!;
+                        _familia = value!;
                       });
                     },
                   ),

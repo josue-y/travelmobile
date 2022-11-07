@@ -1,15 +1,9 @@
 import 'package:ejemplo_2/modelos/user.dart';
-import 'package:ejemplo_2/repositorio/registrousuariofirebase.dart';
 import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistro.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:ejemplo_2/firebase_options.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 
 class VistaLogin extends StatefulWidget {
   const VistaLogin({Key? key}) : super(key: key);
@@ -19,27 +13,26 @@ class VistaLogin extends StatefulWidget {
 }
 
 class _VistaLoginState extends State<VistaLogin> {
-  FirebaseAuth firebaseAuth=FirebaseAuth.instance;
-  final usuario = TextEditingController();
-  final _passwordclave = TextEditingController();
-  String usu="";
-  String clave="";
-  Usuario userloader = Usuario.Empty();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+
+  User userloader = User.Empty();
+
   obtenerUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> userMap = jsonDecode(prefs.getString("user")!);
-    userloader = Usuario.fromJson(userMap);
+    userloader = User.fromJson(userMap);
   }
-  void validarUser (){
 
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> VistaPoi()));
-
+  void validarUser() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => VistaPoi()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
+      body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: Center(
             child: SingleChildScrollView(
@@ -47,19 +40,19 @@ class _VistaLoginState extends State<VistaLogin> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    width: 80,
-                    height: 80,
+                    width: 100,
+                    height: 100,
                     margin: EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                           image: AssetImage(
-                            "imagenes/viaje.jpg",
-                          )),
+                        "imagenes/viaje.jpg",
+                      )),
                     ),
                   ),
                   TextFormField(
-                    controller: usuario,
+                    controller: _email,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Correo electrónico'),
@@ -69,52 +62,40 @@ class _VistaLoginState extends State<VistaLogin> {
                     height: 16.0,
                   ),
                   TextFormField(
-                    controller: _passwordclave,
+                    controller: _password,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), labelText: 'Contraseña'),
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 16.0,
                   ),
                   ElevatedButton(
                       onPressed: () {
                         validarUser();
+
+
+
                       },
                       child: const Text('Iniciar sesión')),
                   TextButton(
                     style: TextButton.styleFrom(
                         textStyle: const TextStyle(
-                            fontSize: 10,
+                            fontSize: 16,
                             fontStyle: FontStyle.italic,
                             color: Colors.blue)),
-                    onPressed: () async {
-                      usu = usuario.text;
-                      clave = clave;
-                      final datos = await firebaseAuth
-                          .signInWithEmailAndPassword(
-                          email: usu, password: clave);
-                      print(datos);
-                      if (datos != null) {
-                        print(usu);
-                        print(clave);
-                      }
+                    onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => VistaRegistro()));
                     },
-
-
                     child: const Text('Registrese'),
-
                   ),
                 ],
               ),
             ),
-          ),
-        )
+          )),
     );
-
   }
 }

@@ -1,25 +1,53 @@
-class Usuario {
+class User {
   var _email;
   var _password;
+  var _genre;
+  var _favoritesGenres;
+  var _bornDate;
 
-  Usuario.Empty();
+  User.Empty();
 
-  Usuario.fromJson(Map<String, dynamic> json)
+  User.fromJson(Map<String, dynamic> json)
       :
+
         _email = json['email'],
-        _password = json['password'];
+        _password = json['password'],
+        _genre = json['genre'],
+        _favoritesGenres = json['favoritesGenres'],
+        _bornDate = json['bornDate'];
+
 
   Map<String, dynamic> toJson() => {
     'email': _email,
     'password': _password,
+    'genre': _genre,
+    'favoritesGenres': _favoritesGenres,
+    'bornDate': _bornDate
   };
 
-  Usuario(this._email, this._password);
+  User( this._email, this._password, this._genre,
+      this._favoritesGenres, this._bornDate);
+
+
 
   get email => _email;
 
-  set email(value) {
-    _email = value;
+  get bornDate => _bornDate;
+
+  set bornDate(value) {
+    _bornDate = value;
+  }
+
+  get favoritesGenres => _favoritesGenres;
+
+  set favoritesGenres(value) {
+    _favoritesGenres = value;
+  }
+
+  get genre => _genre;
+
+  set genre(value) {
+    _genre = value;
   }
 
   get password => _password;
@@ -28,5 +56,7 @@ class Usuario {
     _password = value;
   }
 
-
+  set email(value) {
+    _email = value;
+  }
 }

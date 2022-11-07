@@ -2,7 +2,6 @@
 // ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
-
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
@@ -51,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBysfxnn7BcOczZI6gTeU9gGd2gIMZSpFI',
-    appId: '1:691824795003:android:eaf20f914fbd04814b31de',
-    messagingSenderId: '691824795003',
-    projectId: 'dbgroupmovile',
-    storageBucket: 'dbgroupmovile.appspot.com',
+    apiKey: 'AIzaSyB5h5YrryDYh__YZF0VLy5caHYcZCOW-dc',
+    appId: '1:648334559138:android:d1f3fe9f446787025d94fb',
+    messagingSenderId: '648334559138',
+    projectId: 'travelmobile-4e339',
+    storageBucket: 'travelmobile-4e339.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD4-w9h2G6qGlnENKep6ivLBYj2IOO6Mls',
-    appId: '1:691824795003:ios:c5d9649731721edf4b31de',
-    messagingSenderId: '691824795003',
-    projectId: 'dbgroupmovile',
-    storageBucket: 'dbgroupmovile.appspot.com',
-    iosClientId: '691824795003-09bqc8v66nujunmv6flgdalnlvhr3uv2.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDwtbBQccQ0ml7UuBU222Ju78-qlN6B7P8',
+    appId: '1:648334559138:ios:ab12648679c45bb75d94fb',
+    messagingSenderId: '648334559138',
+    projectId: 'travelmobile-4e339',
+    storageBucket: 'travelmobile-4e339.appspot.com',
+    iosClientId: '648334559138-a39krvr9qbm0ttjdhndjqbogo9d59kcs.apps.googleusercontent.com',
     iosBundleId: 'com.example.travelmobile',
   );
 }
