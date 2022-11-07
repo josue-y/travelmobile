@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../repositorio/firebase.dart';
+
 class VistaLogin extends StatefulWidget {
   const VistaLogin({Key? key}) : super(key: key);
 
@@ -17,9 +19,10 @@ class _VistaLoginState extends State<VistaLogin> {
   final _password = TextEditingController();
 
   Users userloader = Users.Vacio();
+  final Firebase objectFirebaseUser = Firebase();
 
-  void initState (){
-    obtenerUser();
+  void initState() {
+    //obtenerUser();
     super.initState();
   }
 
@@ -28,7 +31,6 @@ class _VistaLoginState extends State<VistaLogin> {
     Map<String, dynamic> userMap = jsonDecode(prefs.getString("users")!);
     userloader = Users.fromJson(userMap);
   }
-
 
   void mostrarMsg(String msg) {
     final scaffold = ScaffoldMessenger.of(context);
@@ -41,17 +43,26 @@ class _VistaLoginState extends State<VistaLogin> {
     );
   }
 
-
-
-  void validarUser() {
-    if (_email == userloader.email && _password == userloader.password) {
+  void validarUser() async {
+    if (_email.text.isEmpty || _password.text.isEmpty) {
+      mostrarMsg("Diligenciar correo y contraseña");
+    } else {
+      var result =
+          await objectFirebaseUser.ingresarUsuario(_email.text, _password.text);
+      String msj = "";
+      if (result == "invalid-email") {
+        msj = "El correo esta incompleto";
+      } else if (result == "wrong-password") {
+        msj = "Correo o contraseña incorrecta";
+      } else if (result == "network-request-failed") {
+        msj = "Conexión a la red ha fallado";
+      } else
+        msj = "Bienvenido";
+      mostrarMsg("JOSE");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => VistaPoi()));
-    }else {
-      mostrarMsg("Correo o contraseña invalidas");
     }
-    }
-
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +108,6 @@ class _VistaLoginState extends State<VistaLogin> {
                   ElevatedButton(
                       onPressed: () {
                         validarUser();
-
-
-
                       },
                       child: const Text('Iniciar sesión')),
                   TextButton(
