@@ -19,7 +19,7 @@ enum Genero { masculino, femenino }
 class _VistaRegistroState extends State<VistaRegistro> {
   //final Firebase firebseApi = Firebase();  //Semana 4
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  Firebase objectFirebaseUser = Firebase();
+  final Firebase objectFirebaseUser = Firebase();
 
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -74,17 +74,21 @@ class _VistaRegistroState extends State<VistaRegistro> {
   void guardarUsuario(Users users) async {
     //SharedPreferences prefs = await SharedPreferences.getInstance();
     //prefs.setString("user", jsonEncode(user)); //Semana 4
-    var result =
-        await objectFirebaseUser.registrarUsuario(_email.text, _password.text);
-    if (result) {
-      mostrarMsg("Datos registrados");
-    }
+    var result = await objectFirebaseUser.registrarUsuario(
+        users.email, users.password); //email.txt password.txt
+    String msj = "";
+    if (result == "invalid-email") {
+      msj = "El correo esta incompleto";
+    } else if (result == "weak-password") {
+      msj = "Contraseña debil, minimo 6 digitos";
+    } else if (result == "email-already-in-use") {
+      msj = "Correo registrado anteriormente";
+    } else if (result == "network-request-failed") {
+      msj = "Conexión a la red ha fallado";
+    } else
+      msj = "Registro exitoso";
 
-    // final datos =
-    //     await objectFirebaseUser.registrarUsuario(users.email, users.password);
-    // if (datos){
-    //   mostrarMsg("Datos registrados");
-    // }
+    mostrarMsg(msj);
   }
 
   void botonRegistro() {

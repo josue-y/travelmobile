@@ -16,18 +16,42 @@ class _VistaLoginState extends State<VistaLogin> {
   final _email = TextEditingController();
   final _password = TextEditingController();
 
-  Users userloader = Users.Empty();
+  Users userloader = Users.Vacio();
+
+  void initState (){
+    obtenerUser();
+    super.initState();
+  }
 
   obtenerUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map<String, dynamic> userMap = jsonDecode(prefs.getString("user")!);
+    Map<String, dynamic> userMap = jsonDecode(prefs.getString("users")!);
     userloader = Users.fromJson(userMap);
   }
 
-  void validarUser() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => VistaPoi()));
+
+  void mostrarMsg(String msg) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        action: SnackBarAction(
+            label: 'Aceptar', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
   }
+
+
+
+  void validarUser() {
+    if (_email == userloader.email && _password == userloader.password) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => VistaPoi()));
+    }else {
+      mostrarMsg("Correo o contraseña invalidas");
+    }
+    }
+
 
   @override
   Widget build(BuildContext context) {

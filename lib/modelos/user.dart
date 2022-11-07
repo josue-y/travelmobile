@@ -5,7 +5,7 @@ class Users {
   var _favoritesGenres;
   var _bornDate;
 
-  Users.Empty();
+  Users.Vacio();
 
   Users.fromJson(Map<String, dynamic> json)
       :
