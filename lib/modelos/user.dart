@@ -1,15 +1,18 @@
 class Users {
+  var _uid;
   var _email;
   var _password;
   var _genre;
   var _favoritesGenres;
   var _bornDate;
 
+  Users(this._uid, this._email, this._password, this._genre,
+      this._favoritesGenres, this._bornDate);
+
   Users.Vacio();
 
   Users.fromJson(Map<String, dynamic> json)
-      :
-
+      : _uid = json['uid'],
         _email = json['email'],
         _password = json['password'],
         _genre = json['genre'],
@@ -18,6 +21,7 @@ class Users {
 
 
   Map<String, dynamic> toJson() => {
+    'uid': _uid,
     'email': _email,
     'password': _password,
     'genre': _genre,
@@ -26,7 +30,7 @@ class Users {
   };
 
 
-  Users( this._email, this._password);
+  // Users( this._email, this._password);
 
   // User( this._email, this._password, this._genre,
   //     this._favoritesGenres, this._bornDate);
@@ -61,5 +65,11 @@ class Users {
 
   set email(value) {
     _email = value;
+  }
+
+  get uid => _uid;
+
+  set uid(value) {
+    _uid = value;
   }
 }

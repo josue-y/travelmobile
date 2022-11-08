@@ -1,6 +1,6 @@
 import 'package:ejemplo_2/modelos/user.dart';
 import 'package:ejemplo_2/vistas/vistapoi.dart';
-import 'package:ejemplo_2/vistas/vistaregistro.dart';
+import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,9 +44,14 @@ class _VistaLoginState extends State<VistaLogin> {
   }
 
   void validarUser() async {
+
     if (_email.text.isEmpty || _password.text.isEmpty) {
       mostrarMsg("Diligenciar correo y contraseña");
-    } else {
+    }
+    if (_email.text != userloader.email  || _password.text != userloader.password) {
+      mostrarMsg("Usuario no registrado");
+    }
+    else {
       var result =
           await objectFirebaseUser.ingresarUsuario(_email.text, _password.text);
       String msj = "";
@@ -58,11 +63,12 @@ class _VistaLoginState extends State<VistaLogin> {
         msj = "Conexión a la red ha fallado";
       } else
         msj = "Bienvenido";
-      mostrarMsg("JOSE");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => VistaPoi()));
     }
-  }
+
+    }
+
 
   @override
   Widget build(BuildContext context) {

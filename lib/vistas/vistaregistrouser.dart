@@ -1,5 +1,6 @@
 import 'package:ejemplo_2/modelos/user.dart';
 import 'package:ejemplo_2/repositorio/firebase.dart';
+import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
@@ -71,12 +72,25 @@ class _VistaRegistroState extends State<VistaRegistro> {
     );
   }
 
-  void guardarUsuario(Users users) async {
+  void _guardarUsuario(Users users) async {
+    var result = await objectFirebaseUser.crearUsuario(users);
+    if (users.email.isEmpty || users.password.isEmpty) {
+      mostrarMsg("Campos vacíos");
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const VistaLogin()));
+      mostrarMsg("Registro exitoso");
+    }
+  }
+
+
+  void registrarUsuario(Users users) async {
     //SharedPreferences prefs = await SharedPreferences.getInstance();
     //prefs.setString("user", jsonEncode(user)); //Semana 4
     var result = await objectFirebaseUser.registrarUsuario(
         users.email, users.password); //email.txt password.txt
     String msj = "";
+
     if (result == "invalid-email") {
       msj = "El correo esta incompleto";
     } else if (result == "weak-password") {
@@ -85,10 +99,10 @@ class _VistaRegistroState extends State<VistaRegistro> {
       msj = "Correo registrado anteriormente";
     } else if (result == "network-request-failed") {
       msj = "Conexión a la red ha fallado";
-    } else
-      msj = "Registro exitoso";
-
-    mostrarMsg(msj);
+    } else {
+      users.uid = result;
+    }
+    _guardarUsuario(users);
   }
 
   void botonRegistro() {
@@ -104,10 +118,9 @@ class _VistaRegistroState extends State<VistaRegistro> {
         if (_individual) favoritos = "$favoritos Individual";
         if (_amigos) favoritos = "$favoritos Amigos";
         if (_familia) favoritos = "$favoritos Familia";
-        var usuario = Users(_email.text, _password.text);
-        guardarUsuario(usuario);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => VistaLogin()));
+        var usuario =
+            Users("", _email.text, _password.text, genero, favoritos, _date);
+        registrarUsuario(usuario);
       } else {
         mostrarMsg("Las contraseñas no coinciden");
       }
