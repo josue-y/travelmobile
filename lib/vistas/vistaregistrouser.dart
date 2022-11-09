@@ -75,23 +75,34 @@ class _VistaRegistroState extends State<VistaRegistro> {
     var result = await objectFirebaseUser.crearUsuario(users);
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const VistaLogin()));
-    mostrarMsg("Registro exitoso");
+
   }
 
   void registrarUsuario(Users users) async {
-    var result = await objectFirebaseUser.registrarUsuario(users.email, users.password); //email.txt password.txt
+    final result = await objectFirebaseUser.registrarUsuario(
+        users.email, users.password); //email.txt password.txt
     String msg = "";
-    if (result == "invalid-email") {
-      msg = "El correo esta incompleto";
-    } else if (result == "weak-password") {
-      msg = "Contraseña debil, minimo 6 digitos";
-    } else if (result == "email-already-in-use") {
-      msg = "Correo registrado anteriormente";
-    } else if (result == "network-request-failed") {msg = "Conexión a la red ha fallado";} else
-      // msg = "Registro Exitoso";
-    mostrarMsg(msg);
-    users.uid = result;
-    _guardarUsuario(users);
+    if (_email.text.isEmpty) {
+      mostrarMsg("Correo requerido");
+    }
+    if (_password.text.isEmpty) {
+      mostrarMsg("Contraseña requerida");
+    } else {
+      if (result == "invalid-email") {
+        msg = "El correo esta incompleto";
+      } else if (result == "weak-password") {
+        msg = "Contraseña debil, minimo 6 digitos";
+      } else if (result == "email-already-in-use") {
+        msg = "Correo registrado anteriormente";
+      } else if (result == "network-request-failed") {
+        msg = "Conexión a la red ha fallado";
+      } else {
+        msg = "Registro Exitoso";
+        users.uid = result;
+        _guardarUsuario(users);
+      }
+      mostrarMsg(msg);
+    }
   }
 
   void botonRegistro() {
