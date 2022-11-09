@@ -18,8 +18,7 @@ class VistaRegistro extends StatefulWidget {
 enum Genero { masculino, femenino }
 
 class _VistaRegistroState extends State<VistaRegistro> {
-  //final Firebase firebseApi = Firebase();  //Semana 4
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  // FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final Firebase objectFirebaseUser = Firebase();
 
   final _email = TextEditingController();
@@ -74,34 +73,24 @@ class _VistaRegistroState extends State<VistaRegistro> {
 
   void _guardarUsuario(Users users) async {
     var result = await objectFirebaseUser.crearUsuario(users);
-    if (users.email.isEmpty || users.password.isEmpty) {
-      mostrarMsg("Campos vacíos");
-    } else {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const VistaLogin()));
-      mostrarMsg("Registro exitoso");
-    }
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const VistaLogin()));
+    mostrarMsg("Registro exitoso");
   }
 
-
   void registrarUsuario(Users users) async {
-    //SharedPreferences prefs = await SharedPreferences.getInstance();
-    //prefs.setString("user", jsonEncode(user)); //Semana 4
-    var result = await objectFirebaseUser.registrarUsuario(
-        users.email, users.password); //email.txt password.txt
-    String msj = "";
-
+    var result = await objectFirebaseUser.registrarUsuario(users.email, users.password); //email.txt password.txt
+    String msg = "";
     if (result == "invalid-email") {
-      msj = "El correo esta incompleto";
+      msg = "El correo esta incompleto";
     } else if (result == "weak-password") {
-      msj = "Contraseña debil, minimo 6 digitos";
+      msg = "Contraseña debil, minimo 6 digitos";
     } else if (result == "email-already-in-use") {
-      msj = "Correo registrado anteriormente";
-    } else if (result == "network-request-failed") {
-      msj = "Conexión a la red ha fallado";
-    } else {
-      users.uid = result;
-    }
+      msg = "Correo registrado anteriormente";
+    } else if (result == "network-request-failed") {msg = "Conexión a la red ha fallado";} else
+      // msg = "Registro Exitoso";
+    mostrarMsg(msg);
+    users.uid = result;
     _guardarUsuario(users);
   }
 
@@ -254,10 +243,6 @@ class _VistaRegistroState extends State<VistaRegistro> {
                     ),
                     onPressed: () {
                       botonRegistro();
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => VistaRegistro()));
                     },
                     child: const Text("Registrar"),
                   ),
