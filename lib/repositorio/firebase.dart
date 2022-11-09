@@ -34,7 +34,7 @@ class Firebase {
 
   Future<String> crearUsuario(Users users) async {
     try {
-      final document = await FirebaseFirestore.instance.collection("usuarios").add(users.toJson());
+      final document = await FirebaseFirestore.instance.collection("usuarios").doc(users.uid).set(users.toJson());
       return users.uid;
     } on FirebaseException catch (e) {
       print("FirebaseException ${e.code}");
