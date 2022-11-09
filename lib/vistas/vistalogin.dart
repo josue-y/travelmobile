@@ -68,6 +68,8 @@ class _VistaLoginState extends State<VistaLogin> {
       msg = "Correo o contrasena incorrecta";
     } else if (result == "network-request-failed") {
       msg = "Fallo de red";
+    } else if (result == "user-not-found") {
+      msg = "Usuario no registrado";
     } else {
       mostrarMsg("Bienvenido");
       Navigator.pushReplacement(
