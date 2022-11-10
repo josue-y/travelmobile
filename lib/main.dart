@@ -1,5 +1,8 @@
+import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
+import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
+import 'package:ejemplo_2/vistas/vistasitionuevo.dart';
 import 'package:ejemplo_2/vistas/vistasplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

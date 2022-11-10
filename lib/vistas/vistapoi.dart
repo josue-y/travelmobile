@@ -1,3 +1,4 @@
+import 'package:ejemplo_2/vistas/vistasitionuevo.dart';
 import 'package:flutter/material.dart';
 
 class VistaPoi extends StatelessWidget {
@@ -6,12 +7,15 @@ class VistaPoi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+        appBar: AppBar(
+          title: Text("Sitio Turístico"),
+        ),
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-
+          child: SingleChildScrollView(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Container(
                 width: 300,
                 height: 300,
@@ -19,37 +23,62 @@ class VistaPoi extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
                       image: AssetImage(
-                        "imagenes/medellin.jpg",
-                      )),
+                    "imagenes/medellin.jpg",
+                  )),
                 ),
               ),
-
-
-              Text(
-                "TRAVELMOBILE",
+              const SizedBox(
+                height: 16.0,
+              ),
+              const Text(
+                "Medellín",
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.green,
                     fontFamily: "contenido"),
               ),
-
-              Text(
-                "CIUDAD: Medellin."
-                    '\n'
-                    '\n'
-                    "DEPARTAMENTO: Antioquia."
-                    '\n'
-                    '\n'
-                    "TEMPERATURA:22°"
-                    '\n'
-                    '\n'
-                    "DESCRIPCION: Estamos ubicados en la hermosa ciudad de las flores, contamos con excelentes servicios.",
-                style: TextStyle(
-                    fontSize: 20, fontFamily: "miletra", color: Colors.black),
+              const SizedBox(
+                height: 16.0,
+              ),
+              const Text("Ciudad : Medelllin",
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+              const SizedBox(
+                height: 16.0,
+              ),
+              const Text("Departamento: Antioquia",
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+              const SizedBox(
+                height: 16.0,
+              ),
+              const Text("Temperatura: 22°",
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+              const SizedBox(
+                height: 16.0,
+              ),
+              const Text(
+                  "Tradición arriera y herencia floricultora de más de 50 años, clima primaveral para la flora urbana, gran comercio de flores y embellecidos parques públicos y jardines convierten a Medellín en la ciudad de las flores.",
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+              const SizedBox(
+                height: 16.0,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => const NuevoSitio()));
+                },
+                child: const Text("Agregar Sitio"),
               )
             ],
           )),
-    );
+        ));
   }
 }

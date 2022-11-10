@@ -137,7 +137,7 @@ Widget build(BuildContext context) {
                         MaterialPageRoute(
                             builder: (context) => VistaRegistro()));
                   },
-                  child: const Text('Registrese'),
+                  child: const Text('Regístrate aquí'),
                 ),
               ],
             ),
