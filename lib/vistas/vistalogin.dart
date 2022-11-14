@@ -1,4 +1,5 @@
 import 'package:ejemplo_2/modelos/user.dart';
+import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
 import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,7 +74,7 @@ class _VistaLoginState extends State<VistaLogin> {
     } else {
       mostrarMsg("Bienvenido");
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const VistaPoi()));
+          context, MaterialPageRoute(builder: (context) => const SitiosTuristicos()));
     }
     mostrarMsg(msg);
   }

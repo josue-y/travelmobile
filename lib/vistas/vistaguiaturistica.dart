@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ejemplo_2/vistas/vistasitionuevo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../repositorio/firebase.dart';
 
 class SitiosTuristicos extends StatefulWidget {
   const SitiosTuristicos({Key? key}) : super(key: key);
@@ -9,6 +13,8 @@ class SitiosTuristicos extends StatefulWidget {
 }
 
 class _SitiosTuristicosState extends State<SitiosTuristicos> {
+  final Firebase objectFirebaseUser = Firebase();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,15 +22,30 @@ class _SitiosTuristicosState extends State<SitiosTuristicos> {
         title: Text("Sitios a Visitar"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 16.0,
-            )
-          ],
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection("Usuarios")
+                .doc(FirebaseAuth.instance.currentUser?.uid)
+                .collection("Sitios")
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return const Text("Cargando");
+              return ListView.builder(
+                itemCount: snapshot.data?.docs.length,
+                itemBuilder: (context, index) {
+                  QueryDocumentSnapshot sitio = snapshot.data!.docs[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(sitio["nombre"]),
+                      subtitle: Text(sitio["region"]
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
