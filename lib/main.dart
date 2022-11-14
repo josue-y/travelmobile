@@ -1,8 +1,9 @@
-import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
+import 'package:ejemplo_2/vistas/busquedasitio.dart';
+import 'package:ejemplo_2/vistas/sitioscol.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
-import 'package:ejemplo_2/vistas/vistasitionuevo.dart';
+import 'package:ejemplo_2/vistas/sitionuevo.dart';
 import 'package:ejemplo_2/vistas/vistasplash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,7 +32,7 @@ class Inicio extends StatelessWidget {
       ],
       supportedLocales: const [Locale("en", "US"), Locale("es", "CO")],
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const VistaSplash(),
+      home: const BusquedaSite(),
     );
   }
 }

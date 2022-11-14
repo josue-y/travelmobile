@@ -1,4 +1,4 @@
-import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
+import 'package:ejemplo_2/vistas/sitioscol.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

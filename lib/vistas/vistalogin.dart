@@ -1,5 +1,5 @@
 import 'package:ejemplo_2/modelos/user.dart';
-import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
+import 'package:ejemplo_2/vistas/sitioscol.dart';
 import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
