@@ -29,14 +29,6 @@ class Users {
     'bornDate': _bornDate
   };
 
-
-  // Users( this._email, this._password);
-
-  // User( this._email, this._password, this._genre,
-  //     this._favoritesGenres, this._bornDate);
-
-
-
   get email => _email;
 
   get bornDate => _bornDate;

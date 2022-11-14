@@ -1,5 +1,8 @@
+import 'package:ejemplo_2/modelos/clasesitio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../repositorio/firebase.dart';
 
 class NuevoSitio extends StatefulWidget {
   const NuevoSitio({Key? key}) : super(key: key);
@@ -9,9 +12,11 @@ class NuevoSitio extends StatefulWidget {
 }
 
 class _NuevoSitioState extends State<NuevoSitio> {
+  final Firebase objectFirebaseUser = Firebase();
+
   final _nombreSitio = TextEditingController();
-  final _ubicacion = TextEditingController();
-  final _numeroPage = TextEditingController();
+  final _departamento = TextEditingController();
+  final _clima = TextEditingController();
 
   double _calificacion = 5.0;
   bool regionCaribe = false,
@@ -20,7 +25,34 @@ class _NuevoSitioState extends State<NuevoSitio> {
       regionAmazonia = false,
       regionOrinoquia = false;
 
-  void _guardarSitio() {}
+  void mostrarMsg(String msg) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        action: SnackBarAction(
+            label: 'Aceptar', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
+  void _crearSitio(Sitio sitio) async {
+    var result = await objectFirebaseUser.crearSitio(sitio);
+    mostrarMsg(result!);
+    Navigator.pop(context);
+  }
+
+  void _guardarSitio() {
+    var region = "";
+    if (regionCaribe) region = "$region Región Caribe";
+    if (regionPacifica) region = "$region Región Pacifíca";
+    if (regionAndina) region = "$region Región Andina";
+    if (regionAmazonia) region = "$region Región Amazónia";
+    if (regionOrinoquia) region = "$region Región Caribe";
+    var sitio = Sitio(
+        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region);
+    _crearSitio(sitio);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +76,18 @@ class _NuevoSitioState extends State<NuevoSitio> {
                 height: 16.0,
               ),
               TextFormField(
-                controller: _ubicacion,
+                controller: _departamento,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Ubicación"),
+                    border: OutlineInputBorder(), labelText: "Departamento"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
                 height: 16.0,
               ),
               TextFormField(
-                controller: _numeroPage,
+                controller: _clima,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Número Página"),
+                    border: OutlineInputBorder(), labelText: "Clima"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
@@ -68,10 +100,11 @@ class _NuevoSitioState extends State<NuevoSitio> {
                   allowHalfRating: true,
                   itemCount: 5,
                   itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.orange,
-                      ),
+                  itemBuilder: (context, _) =>
+                  const Icon(
+                    Icons.star,
+                    color: Colors.orange,
+                  ),
                   onRatingUpdate: (ubicacion) {}),
               const SizedBox(
                 height: 16.0,
@@ -99,7 +132,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
                   ),
                   Expanded(
                     child: CheckboxListTile(
-                      title: const Text("Región Pacifica"),
+                      title: const Text("Región Pacífica"),
                       value: regionPacifica,
                       selected: regionPacifica,
                       onChanged: (bool? value) {

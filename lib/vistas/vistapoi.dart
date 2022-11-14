@@ -1,3 +1,4 @@
+import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
 import 'package:ejemplo_2/vistas/vistasitionuevo.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +74,7 @@ class VistaPoi extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const NuevoSitio()));
+                      context, MaterialPageRoute(builder: (context) => const SitiosTuristicos()));
                 },
                 child: const Text("Agregar Sitio"),
               )
