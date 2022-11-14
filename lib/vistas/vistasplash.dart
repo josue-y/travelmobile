@@ -1,4 +1,6 @@
+import 'package:ejemplo_2/vistas/vistaguiaturistica.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class VistaSplash extends StatefulWidget {
@@ -15,10 +17,16 @@ class _VistaSplashState extends State<VistaSplash> {
   }
 
   Future<void> cierreSplash() async {
-    Future.delayed(const Duration(seconds: 4), () async {
+    var userActual = FirebaseAuth.instance.currentUser;
+    if (userActual == null) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const VistaLogin()));
-    });
+          context, MaterialPageRoute(builder: (context) => const SitiosTuristicos()));
+    } else {
+      Future.delayed(const Duration(seconds: 4), () async {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const VistaLogin()));
+      });
+    }
   }
 
   @override
