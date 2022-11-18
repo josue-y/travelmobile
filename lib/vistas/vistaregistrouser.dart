@@ -1,6 +1,5 @@
 import 'package:ejemplo_2/modelos/user.dart';
-import 'package:ejemplo_2/repositorio/firebase.dart';
-import 'package:ejemplo_2/vistas/vistapoi.dart';
+import 'package:ejemplo_2/repositorio/firebase_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';

@@ -6,7 +6,7 @@ import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:ejemplo_2/vistas/addsitionuevo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../repositorio/firebase.dart';
+import '../repositorio/firebase_api.dart';
 
 class SitiosTuristicos extends StatefulWidget {
   const SitiosTuristicos({Key? key}) : super(key: key);

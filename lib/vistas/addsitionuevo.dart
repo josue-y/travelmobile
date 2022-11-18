@@ -2,7 +2,7 @@ import 'package:ejemplo_2/modelos/clasesitio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../repositorio/firebase.dart';
+import '../repositorio/firebase_api.dart';
 
 class NuevoSitio extends StatefulWidget {
   const NuevoSitio({Key? key}) : super(key: key);

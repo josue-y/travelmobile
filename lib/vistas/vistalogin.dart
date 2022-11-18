@@ -1,14 +1,13 @@
 import 'package:ejemplo_2/modelos/user.dart';
 import 'package:ejemplo_2/vistas/sitiosturisticos.dart';
 import 'package:ejemplo_2/vistas/vistahome.dart';
-import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../repositorio/firebase.dart';
+import '../repositorio/firebase_api.dart';
 
 class VistaLogin extends StatefulWidget {
   const VistaLogin({Key? key}) : super(key: key);

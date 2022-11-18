@@ -1,7 +1,6 @@
 import 'package:ejemplo_2/vistas/busquedasitio.dart';
 import 'package:ejemplo_2/vistas/sitiosturisticos.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
-import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
 import 'package:ejemplo_2/vistas/addsitionuevo.dart';
 import 'package:ejemplo_2/vistas/vistasplash.dart';

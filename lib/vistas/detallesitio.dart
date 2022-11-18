@@ -2,30 +2,6 @@ import 'package:ejemplo_2/modelos/clasesitio.dart';
 import 'package:ejemplo_2/modelos/regionesdetalle.dart';
 import 'package:flutter/material.dart';
 
-// class DetalleSitio extends StatelessWidget {
-//   final
-//   const DetalleSitio({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text("Hola"),
-//         ),
-//         body: SingleChildScrollView(
-//           child: Column(
-//             children: [
-//
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
 
 
 class DetalleSitio extends StatelessWidget {
