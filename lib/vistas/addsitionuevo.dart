@@ -17,6 +17,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
   final _nombreSitio = TextEditingController();
   final _departamento = TextEditingController();
   final _clima = TextEditingController();
+  final _descripcion = TextEditingController();
 
   double _calificacion = 5.0;
   bool regionCaribe = false,
@@ -38,7 +39,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
 
   void _crearSitio(Sitio sitio) async {
     var result = await objectFirebaseUser.crearSitio(sitio);
-    mostrarMsg(result!);
+    mostrarMsg(result);
     Navigator.pop(context);
   }
 
@@ -50,7 +51,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
     if (regionAmazonia) region = "$region Región Amazónia";
     if (regionOrinoquia) region = "$region Región Caribe";
     var sitio = Sitio(
-        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region);
+        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region, _descripcion.text) ;
     _crearSitio(sitio);
   }
 
@@ -69,7 +70,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
               TextFormField(
                 controller: _nombreSitio,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Nombre Sitio"),
+                    border: OutlineInputBorder(), labelText: "Ciudad"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
@@ -87,7 +88,16 @@ class _NuevoSitioState extends State<NuevoSitio> {
               TextFormField(
                 controller: _clima,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Clima"),
+                    border: OutlineInputBorder(), labelText: "Clima (Calído/Frío/Templado)"),
+                keyboardType: TextInputType.text,
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              TextFormField(
+                controller: _descripcion,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Descripción"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
@@ -109,9 +119,9 @@ class _NuevoSitioState extends State<NuevoSitio> {
               const SizedBox(
                 height: 16.0,
               ),
-              const Text("Región(s) de Colombia",
+              const Text("Región a la cuál pertenece",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                   )),
               const SizedBox(
                 height: 16.0,

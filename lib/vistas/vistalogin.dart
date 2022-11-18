@@ -1,5 +1,6 @@
 import 'package:ejemplo_2/modelos/user.dart';
-import 'package:ejemplo_2/vistas/sitioscol.dart';
+import 'package:ejemplo_2/vistas/sitiosturisticos.dart';
+import 'package:ejemplo_2/vistas/vistahome.dart';
 import 'package:ejemplo_2/vistas/vistapoi.dart';
 import 'package:ejemplo_2/vistas/vistaregistrouser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,7 +37,6 @@ class _VistaLoginState extends State<VistaLogin> {
     userloader = Users.fromJson(userMap);
   }
 
-
   void mostrarMsg(String msg) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
@@ -61,7 +61,7 @@ class _VistaLoginState extends State<VistaLogin> {
 
   void _accederUser() async {
     final result =
-    await objectFirebaseUser.loginUser(_email.text, _password.text);
+        await objectFirebaseUser.loginUser(_email.text, _password.text);
     String msg = "";
     if (result == "invalid-email") {
       msg = "Correo electónico no admitido";
@@ -73,76 +73,77 @@ class _VistaLoginState extends State<VistaLogin> {
       msg = "Usuario no registrado";
     } else {
       mostrarMsg("Bienvenido");
+      mostrarMsg(msg);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const SitiosTuristicos()));
+          context, MaterialPageRoute(builder: (context) => const VistaHome()));
     }
-    mostrarMsg(msg);
+
   }
 
-
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  width: 100,
-                  height: 100,
-                  margin: EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "imagenes/viaje.jpg",
-                        )),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 100,
+                    height: 100,
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: AssetImage(
+                        "imagenes/viaje.jpg",
+                      )),
+                    ),
                   ),
-                ),
-                TextFormField(
-                  controller: _email,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Correo electrónico'),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                TextFormField(
-                  controller: _password,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Contraseña'),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                ElevatedButton(
+                  TextFormField(
+                    controller: _email,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Correo electrónico'),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  TextFormField(
+                    controller: _password,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(), labelText: 'Contraseña'),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        _validar();
+                      },
+                      child: const Text('Iniciar sesión')),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.blue)),
                     onPressed: () {
-                      _validar();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VistaRegistro()));
                     },
-                    child: const Text('Iniciar sesión')),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      textStyle: const TextStyle(
-                          fontSize: 16,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.blue)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => VistaRegistro()));
-                  },
-                  child: const Text('Regístrate aquí'),
-                ),
-              ],
+                    child: const Text('Regístrate aquí'),
+                  ),
+                ],
+              ),
             ),
-          ),
-        )),
-  );
-}}
+          )),
+    );
+  }
+}

@@ -1,5 +1,5 @@
-import 'package:ejemplo_2/vistas/sitioscol.dart';
-import 'package:ejemplo_2/vistas/sitionuevo.dart';
+import 'package:ejemplo_2/vistas/sitiosturisticos.dart';
+import 'package:ejemplo_2/vistas/addsitionuevo.dart';
 import 'package:flutter/material.dart';
 
 class VistaPoi extends StatelessWidget {

@@ -37,7 +37,7 @@ class _BusquedaSiteState extends State<BusquedaSite> {
                 controller: _parametro,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Digite Departamento o Código Dane"),
+                    labelText: "Digite Departamento o Regíon"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
@@ -50,27 +50,27 @@ class _BusquedaSiteState extends State<BusquedaSite> {
                 onPressed: () {
                   _buscarSitio();
                 },
-                child: const Text("Buscar Ciudad"),
+                child: const Text("Buscar Regíon"),
               ),
               Expanded(
                 child: ListView.builder(
                   itemCount: listSitios.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Items sitio = listSitios[index];
+                    Items regiones = listSitios[index];
                     return Card(
                       child: ListTile(
                         leading: Image.network(
-                          'https://picsum.photos/seed/picsum/200/300' ?? "",
+                          'https://i.picsum.photos/id/66/3264/2448.jpg?hmac=H9yvGug9-Lk5f-1qZqs6dEV-Yd40jFOIC7oudo4eBK4' ?? "",
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
                             return const Image(
-                              image: AssetImage('assets/images/colombia.jpg'),
+                              image: AssetImage('assets/imagenes/udea.png'),
                             );
                           },
                         ),
-                        title: Text(sitio.municipio ?? "Sin título"),
+                        title: Text(regiones.municipio ?? "Sin título"),
                         subtitle: Text(
-                            sitio.cDigoDaneDelMunicipio ?? "Sin código dane"),
+                            regiones.region ?? "Sin Regíon"),
                         // onTap: () {
                         //   Navigator.push(
                         //       context,

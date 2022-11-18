@@ -1,4 +1,5 @@
-import 'package:ejemplo_2/vistas/sitioscol.dart';
+import 'package:ejemplo_2/vistas/sitiosturisticos.dart';
+import 'package:ejemplo_2/vistas/vistahome.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +18,18 @@ class _VistaSplashState extends State<VistaSplash> {
   }
 
   Future<void> cierreSplash() async {
+    Future.delayed(const Duration(seconds: 3), () async {
     var userActual = FirebaseAuth.instance.currentUser;
     if (userActual == null) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const SitiosTuristicos()));
+          context, MaterialPageRoute(builder: (context) => const VistaLogin()));
     } else {
-      Future.delayed(const Duration(seconds: 4), () async {
+      var iduser = (FirebaseAuth.instance.currentUser?.uid);
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const VistaLogin()));
-      });
+            MaterialPageRoute(builder: (context) => const VistaHome()));
+      }
     }
+    );
   }
 
   @override
