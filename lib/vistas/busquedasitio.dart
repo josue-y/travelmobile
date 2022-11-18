@@ -27,7 +27,7 @@ class _BusquedaSiteState extends State<BusquedaSite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Regiones Api")),
+      // appBar: AppBar(title: Text("Regiones Api")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: Center(

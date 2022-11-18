@@ -55,7 +55,7 @@ class _SitiosTuristicosState extends State<SitiosTuristicos> {
                         },
                       ),
                       onTap: () {
-                        RegionesDetall regionesDetall = RegionesDetall(sitio["nombre"], sitio["foto"], sitio["departamento"], sitio["region"], sitio["descripcion"]);
+                        RegionesDetall regionesDetall = RegionesDetall(sitio ["uid"],sitio['nombre'], sitio['foto'], sitio['departamento'], sitio['region'], sitio['descripcion'], sitio['clima']);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => DetalleSitio(regionesDetall)));
                       },
