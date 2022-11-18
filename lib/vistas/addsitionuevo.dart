@@ -51,7 +51,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
     if (regionAmazonia) region = "$region Región Amazónia";
     if (regionOrinoquia) region = "$region Región Caribe";
     var sitio = Sitio(
-        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region, _descripcion.text) ;
+        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region, _descripcion.text, "") ;
     _crearSitio(sitio);
   }
 
@@ -88,7 +88,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
               TextFormField(
                 controller: _clima,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Clima (Calído/Frío/Templado)"),
+                    border: OutlineInputBorder(), labelText: "Clima (Cálido/Frío/Templado)"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
