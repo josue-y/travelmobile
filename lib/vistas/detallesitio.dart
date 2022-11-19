@@ -15,18 +15,43 @@ class DetalleSitio extends StatefulWidget {
 
 class _DetalleSitioState extends State<DetalleSitio> {
 
+  var isFavorito = false;
+
+  @override
+  void initState() {
+    _getSitioLocal();
+    super.initState();
+  }
+
+  void _getSitioLocal() {
+    final box = Boxes.obtenerFavoritos();
+    box.values.forEach((element) {
+      if (element.id == widget.regionesDetall.id)
+        isFavorito = true;
+    }
+    );
+  }
+
   void _botonFavoritos() {
     var sitioLocal = SitioLocal()
-    ..id = widget.regionesDetall.id
-    ..nombre = widget.regionesDetall.nombre
-        ..departamento = widget.regionesDetall.departamento
-        ..descripcion = widget.regionesDetall.descripcion
-        ..clima = widget.regionesDetall.clima
-        ..linkimage = widget.regionesDetall.foto
-        ..region = widget.regionesDetall.region;
+      ..id = widget.regionesDetall.id
+      ..nombre = widget.regionesDetall.nombre
+      ..departamento = widget.regionesDetall.departamento
+      ..descripcion = widget.regionesDetall.descripcion
+      ..clima = widget.regionesDetall.clima
+      ..linkimage = widget.regionesDetall.foto
+      ..region = widget.regionesDetall.region;
 
     final box = Boxes.obtenerFavoritos();
-    box.add(sitioLocal);
+    // box.add(sitioLocal);
+    if (isFavorito) {
+      box.delete(sitioLocal.id);
+    } else {
+      box.put(sitioLocal.id, sitioLocal);
+    }
+    setState(() {
+      isFavorito = !isFavorito;
+    });
   }
 
   @override
@@ -54,8 +79,8 @@ class _DetalleSitioState extends State<DetalleSitio> {
                 children: [
                   Expanded(child: IconButton(
                     alignment: Alignment.center,
-                    icon: const Icon(Icons.favorite_border_rounded),
-                    color: Color.fromARGB(150, 255, 0, 0),
+                    icon: Icon(isFavorito ? Icons.favorite : Icons.favorite_border),
+                    color: Colors.red,
                     onPressed: (() {
                       _botonFavoritos();
                     }),

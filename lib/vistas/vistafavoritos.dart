@@ -46,6 +46,11 @@ class _VistaFavoritosState extends State<VistaFavoritos> {
                 ),
                 title: Text(sitio.nombre ?? "Sin nombre"),
                 subtitle: Text(sitio.departamento ?? "Sin departamento"),
+                onLongPress: (){
+                  setState(() {
+                    sitio.delete();
+                  });
+                },
               ),
             );
           },
