@@ -18,6 +18,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
   final _departamento = TextEditingController();
   final _clima = TextEditingController();
   final _descripcion = TextEditingController();
+  final _foto = TextEditingController();
 
   double _calificacion = 5.0;
   bool regionCaribe = false,
@@ -51,7 +52,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
     if (regionAmazonia) region = "$region Región Amazónia";
     if (regionOrinoquia) region = "$region Región Caribe";
     var sitio = Sitio(
-        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region, _descripcion.text, "") ;
+        "", _nombreSitio.text, _departamento.text, _clima.text, _calificacion, region, _descripcion.text, _foto.text) ;
     _crearSitio(sitio);
   }
 
@@ -59,7 +60,7 @@ class _NuevoSitioState extends State<NuevoSitio> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nuevo Sitio"),
+        title: Text("Agregar Sitio"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 9),
@@ -98,6 +99,15 @@ class _NuevoSitioState extends State<NuevoSitio> {
                 controller: _descripcion,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: "Descripción"),
+                keyboardType: TextInputType.text,
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              TextFormField(
+                controller: _foto,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Link de la imagen"),
                 keyboardType: TextInputType.text,
               ),
               const SizedBox(
