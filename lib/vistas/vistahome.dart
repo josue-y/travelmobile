@@ -2,6 +2,7 @@ import 'package:ejemplo_2/vistas/busquedasitio.dart';
 import 'package:ejemplo_2/vistas/sitiosturisticos.dart';
 import 'package:ejemplo_2/vistas/vistafavoritos.dart';
 import 'package:ejemplo_2/vistas/vistalogin.dart';
+import 'package:ejemplo_2/vistas/vistamapas.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,6 +35,7 @@ class _VistaHomeState extends State<VistaHome> {
     vistasPage.add(BusquedaSite());
     vistasPage.add(SitiosTuristicos());
     vistasPage.add(VistaFavoritos());
+    vistasPage.add(VistaMapas());
   }
 
   @override
@@ -69,6 +71,7 @@ class _VistaHomeState extends State<VistaHome> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageAcutal,
+        type: BottomNavigationBarType.fixed,
         onTap: (page) {
           _presionarOn(page);
         },
@@ -94,6 +97,12 @@ class _VistaHomeState extends State<VistaHome> {
                 size: 20,
               ),
               label: "Favoritos"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.mapLocation,
+                size: 20,
+              ),
+              label: "Mapas"),
         ],
       ),
     );
