@@ -46,7 +46,7 @@ class _DetalleSitioState extends State<DetalleSitio> {
                 errorBuilder: (BuildContext context, Object exception,
                     StackTrace? stackTrace) {
                   return const Image(
-                    image: AssetImage('assets/imagenes/udea.png'),
+                    image: AssetImage('imagenes/udea.png'),
                   );
                 },
               ),
