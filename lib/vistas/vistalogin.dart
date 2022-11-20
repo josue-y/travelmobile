@@ -72,11 +72,10 @@ class _VistaLoginState extends State<VistaLogin> {
       msg = "Usuario no registrado";
     } else {
       mostrarMsg("Bienvenido");
-      mostrarMsg(msg);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const VistaHome()));
     }
-
+    mostrarMsg(msg);//Mensaje
   }
 
   @override
